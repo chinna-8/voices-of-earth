@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climate Change Statistics</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Climate Change Statistics</h1>
+    <p>Explore critical statistics related to climate change and understand the urgency of the issue. Take a deeper dive into the numbers that tell the story of our planet’s changing climate.</p>
+  </section>
+
+  <!-- Key Statistics and Facts -->
+  <section class="stats">
+    <h2>Climate Change in Numbers</h2>
+
+    <div class="stat-item">
+      <h3>1.2°C</h3>
+      <p>Global temperature increase since pre-industrial times. The world is on track to exceed the critical 1.5°C threshold, leading to more severe climate impacts.</p>
+      <small>Source: <a href="https://www.ipcc.ch/" target="_blank">Intergovernmental Panel on Climate Change (IPCC)</a></small>
+    </div>
+
+    <div class="stat-item">
+      <h3>18%</h3>
+      <p>Percentage of global greenhouse gas emissions caused by deforestation and land-use changes. Protecting forests is key to reducing emissions.</p>
+      <small>Source: <a href="https://www.un.org/" target="_blank">United Nations</a></small>
+    </div>
+
+    <div class="stat-item">
+      <h3>12 Years</h3>
+      <p>Time remaining to limit global warming to 1.5°C and avoid the worst impacts of climate change, according to the IPCC report. Immediate action is necessary.</p>
+      <small>Source: <a href="https://www.ipcc.ch/sr15/" target="_blank">IPCC Special Report</a></small>
+    </div>
+
+    <!-- New Extended Stats -->
+    <div class="stat-item">
+      <h3>0.5 mm/year</h3>
+      <p>The average rate at which sea levels are rising due to global warming. Rising seas are threatening coastal communities and ecosystems.</p>
+      <small>Source: <a href="https://www.nasa.gov/mission_pages/sea_level/" target="_blank">NASA Sea Level Data</a></small>
+    </div>
+
+    <div class="stat-item">
+      <h3>40%</h3>
+      <p>Percentage of the Earth's population living in coastal regions vulnerable to extreme weather events, sea level rise, and flooding.</p>
+      <small>Source: <a href="https://www.unep.org/" target="_blank">UN Environment Programme</a></small>
+    </div>
+
+    <div class="stat-item">
+      <h3>50%+</h3>
+      <p>Amount of the world's coral reefs expected to be lost by 2050 due to rising ocean temperatures, ocean acidification, and human activities.</p>
+      <small>Source: <a href="https://www.wfp.org/" target="_blank">World Food Programme</a></small>
+    </div>
+
+    <div class="stat-item">
+      <h3>$2.7 trillion</h3>
+      <p>Estimated cost of climate-related disasters globally, including extreme weather, droughts, and wildfires, according to global economic forecasts.</p>
+      <small>Source: <a href="https://www.worldbank.org/en/topic/climatechange" target="_blank">World Bank</a></small>
+    </div>
+
+    <!-- Chart for Greenhouse Gas Emissions -->
+    <div class="chart">
+      <h3>Global Greenhouse Gas Emissions by Sector</h3>
+      <canvas id="emissionsChart" width="400" height="200"></canvas>
+      <small>Source: <a href="https://www.iea.org/reports/global-energy-review-2021" target="_blank">International Energy Agency (IEA)</a></small>
+    </div>
+
+    <!-- New Chart for Global CO2 Emissions Over Time -->
+    <div class="chart">
+      <h3>Global CO₂ Emissions Over the Years</h3>
+      <canvas id="co2Chart" width="400" height="200"></canvas>
+      <small>Source: <a href="https://www.globalcarbonproject.org/" target="_blank">Global Carbon Project</a></small>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Climate Change Awareness. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Chart.js -->
+  <script>
+    // Pie Chart for Greenhouse Gas Emissions by Sector
+    var ctx = document.getElementById('emissionsChart').getContext('2d');
+    var emissionsChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Energy', 'Industry', 'Agriculture', 'Waste', 'Land Use'],
+        datasets: [{
+          data: [73, 19, 6, 2, 5],
+          backgroundColor: ['#3498db', '#e74c3c', '#f39c12', '#2ecc71', '#9b59b6'],
+          borderColor: ['#2980b9', '#c0392b', '#f1c40f', '#27ae60', '#8e44ad'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Line Chart for Global CO₂ Emissions Over Time
+    var co2Ctx = document.getElementById('co2Chart').getContext('2d');
+    var co2Chart = new Chart(co2Ctx, {
+      type: 'line',
+      data: {
+        labels: ['1990', '1995', '2000', '2005', '2010', '2015', '2020'],
+        datasets: [{
+          label: 'Global CO₂ Emissions (in Gigatonnes)',
+          data: [22.5, 24.1, 26.7, 28.4, 31.2, 34.2, 36.8],
+          fill: false,
+          borderColor: '#e74c3c',
+          tension: 0.1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Emissions (GtCO₂)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Year'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
